@@ -40,11 +40,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
             jumpPressed = false;
         }
-        rb.velocity = rb.velocity + new Vector2(playerInput * Time.fixedDeltaTime * movementSpeed, 0);
+        rb.velocity += new Vector2(playerInput * Time.fixedDeltaTime * movementSpeed, 0);
     }
-
-    // private void setPlayerPosition(float x, float y)
-    // {
-    //     transform.position = new Vector3(x, y, 0.0f);
-    // }
 }
