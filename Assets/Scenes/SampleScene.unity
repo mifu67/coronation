@@ -305,7 +305,6 @@ GameObject:
   - component: {fileID: 927993911}
   - component: {fileID: 927993910}
   - component: {fileID: 927993912}
-  - component: {fileID: 927993913}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -393,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 45
-  jumpAmount: 20
+  jumpForce: 16
 --- !u!50 &927993911
 Rigidbody2D:
   serializedVersion: 4
@@ -409,7 +408,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -420,7 +419,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &927993912
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -466,21 +465,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &927993913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927993907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e813db4180fc41fc87e8b8f647835c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 100
-  maxHp: 100
-  attack: {fileID: 0}
 --- !u!1 &1440698416
 GameObject:
   m_ObjectHideFlags: 0
@@ -682,8 +666,8 @@ Transform:
   m_GameObject: {fileID: 1560230657}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -5.5, z: 0}
-  m_LocalScale: {x: 20.442188, y: 5.7585936, z: 1}
+  m_LocalPosition: {x: -0.4726, y: -5.5, z: 0}
+  m_LocalScale: {x: 28.495682, y: 5.7585936, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -6,40 +6,65 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController Instance;
-    [SerializeField] private float movementSpeed = 20f;
+    private float movementInputDirection;
+    // to be used later bc I have no sprites rn
+    private bool isFacingRight = true;
     private Rigidbody2D rb;
-    public float jumpAmount = 8;
-    private bool jumpPressed = false;
-    private float playerInput = 0;
-    Vector2 inputVector;
-    void Awake()
-    {
-        rb = gameObject.GetComponent<Rigidbody2D>();
-    }
+
+    public float movementSpeed = 10.0f;
+    public float jumpForce = 16.0f;
     // Start is called before the first frame update
     void Start()
     {
-        // Nothing for now
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerInput = Input.GetAxisRaw("Horizontal");
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        CheckInput();
+        CheckMovementDirection();
+    }
+
+    private void FixedUpdate()
+    {
+        ApplyMovement();
+    }
+
+    private void CheckMovementDirection()
+    {
+        if(isFacingRight && movementInputDirection < 0)
         {
-            jumpPressed = true;
+            Flip();
+        }
+        else if (!isFacingRight && movementInputDirection > 0)
+        {
+            Flip();
         }
     }
 
-    void FixedUpdate()
+    private void CheckInput()
     {
-        if (jumpPressed)
+        movementInputDirection = Input.GetAxisRaw("Horizontal");
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-            jumpPressed = false;
+            Jump();
         }
-        rb.velocity += new Vector2(playerInput * Time.fixedDeltaTime * movementSpeed, 0);
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+    }
+
+    private void ApplyMovement()
+    {
+        rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0.0f, 180.0f, 0.0f);
     }
 }
