@@ -7,12 +7,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private float movementInputDirection;
+    private int numJumpsRemaining;
     // to be used later bc I have no sprites rn
     private bool isFacingRight = true;
     private bool isGrounded;
     private bool canJump;
     private Rigidbody2D rb;
 
+    public int numJumps = 1;
     public float movementSpeed = 5.0f;
     public float jumpForce = 16.0f;
     public float groundCheckRadius;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        numJumpsRemaining = numJumps;
     }
 
     // Update is called once per frame
@@ -48,11 +51,16 @@ public class PlayerController : MonoBehaviour
     {
         if(isGrounded && rb.velocity.y <= 0)
         {
-            canJump = true;
+            numJumpsRemaining = numJumps;
+        }
+        
+        if (numJumpsRemaining <= 0)
+        {
+            canJump = false;
         }
         else 
         {
-            canJump = false;
+            canJump = true;
         }
     }
     private void CheckMovementDirection()
@@ -81,6 +89,7 @@ public class PlayerController : MonoBehaviour
         if (canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            numJumpsRemaining--;
         }
     }
 
